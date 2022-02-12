@@ -243,10 +243,13 @@ final class Elementor_Addon_Halim_Extension {
 
 		require_once( __DIR__ . '/widgets/section-title.php' );
 		require_once( __DIR__ . '/widgets/slider.php' );
+		require_once( __DIR__ . '/widgets/about.php' );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Section_Title_Widget() );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Slider_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_About_Widget() );
 
 	}
 
