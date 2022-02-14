@@ -245,6 +245,9 @@ final class Elementor_Addon_Halim_Extension {
 		require_once( __DIR__ . '/widgets/slider.php' );
 		require_once( __DIR__ . '/widgets/about.php' );
 		require_once( __DIR__ . '/widgets/faq-skills.php' );
+		require_once( __DIR__ . '/widgets/services.php' );
+		require_once( __DIR__ . '/widgets/counter.php' );
+		require_once( __DIR__ . '/widgets/team.php' );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Section_Title_Widget() );
 
@@ -253,6 +256,12 @@ final class Elementor_Addon_Halim_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_About_Widget() );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Faq_Skills_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Services_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Counter_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Team_Widget() );
 
 	}
 
