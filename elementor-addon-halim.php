@@ -146,6 +146,9 @@ final class Elementor_Addon_Halim_Extension {
 			return;
 		}
 
+		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'widget_styles' ] );
+
+		add_action('elementor/frontend/after_enqueue_scripts', [ $this, 'widget_scripts' ] );
 
 		// Add Plugin actions
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'init_widgets' ] );
@@ -248,6 +251,7 @@ final class Elementor_Addon_Halim_Extension {
 		require_once( __DIR__ . '/widgets/services.php' );
 		require_once( __DIR__ . '/widgets/counter.php' );
 		require_once( __DIR__ . '/widgets/team.php' );
+		require_once( __DIR__ . '/widgets/testimonials.php' );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Section_Title_Widget() );
 
@@ -262,6 +266,9 @@ final class Elementor_Addon_Halim_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Counter_Widget() );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Team_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Testimonials_Widget() );
+		
 
 	}
 
@@ -290,14 +297,16 @@ final class Elementor_Addon_Halim_Extension {
 	}
 
 	// Custom CSS
-	// public function widget_styles() {
-	// 	wp_register_style( 'elementor-common-style', plugins_url( 'style.css', __FILE__ ) );
-	// }	
+	public function widget_styles() {
+		wp_register_style( 'elementor-owl', plugins_url( 'assets/css/owl.carousel.css', __FILE__ ) );
+		wp_enqueue_style('elementor-owl');
+	}	
 
     // Custom JS
-	// public function widget_scripts() {
-	// 	wp_register_script( 'elementor-common-js', plugins_url( 'main.js', __FILE__ ) );
-	// }
+	public function widget_scripts() {
+		wp_register_script( 'elementor-owl', plugins_url( 'assets/js/owl.carousel.min.js', __FILE__ ) );
+		wp_enqueue_script('elementor-owl');
+	}
 
     // Custom Category
     public function elementor_addon_halim_category () {

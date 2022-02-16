@@ -133,6 +133,39 @@ class Elementor_Slider_Widget extends \Elementor\Widget_Base {
         $this->end_controls_section();
 
 		$this->start_controls_section(
+			'settings_section',
+			[
+				'label' => esc_html__( 'Settings', 'elementor-addon-halim' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'slider_items', [
+				'label' => esc_html__( 'Items', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 3,
+				'step' => 1,
+				'default' => 1,
+			]
+		);
+
+		$this->add_control(
+			'slider_autoplay',
+			[
+				'label' => esc_html__( 'Autoplay?', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'True', 'elementor-addon-halim' ),
+				'label_off' => esc_html__( 'False', 'elementor-addon-halim' ),
+				'return_value' => 'true',
+				'default' => 'true',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'style_section',
 			[
 				'label' => esc_html__( 'Style', 'elementor-addon-halim' ),
@@ -140,10 +173,11 @@ class Elementor_Slider_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Slider Subheading
 		$this->add_control(
-			'section_subheading_style',
+			'slider_subheading',
 			[
-				'label' => esc_html__( 'Section Subheading', 'elementor-addon-halim' ),
+				'label' => esc_html__( 'Slider Subheading', 'elementor-addon-halim' ),
 				'type' => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -152,98 +186,167 @@ class Elementor_Slider_Widget extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'section_subheading_typography',
-				'selector' => '{{WRAPPER}} .section-title h3 span',
+				'name' => 'slider_subheading_typography',
+				'selector' => '{{WRAPPER}} .slide-table h4',
 			]
 		);
 
 		$this->add_control(
-			'section_subheading_color',
+			'slider_subheading_color',
 			[
 				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .section-title h3 span' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .slide-table h4' => 'color: {{VALUE}}',
 				],
-				'default' => '#333'
+				'default' => '#fff'
 			]
 		);
 
 		$this->add_control(
-			'section_heading_style',
-			[
-				'label' => esc_html__( 'Section Heading', 'elementor-addon-halim' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'section_heading_typography',
-				'selector' => '{{WRAPPER}} .section-title h3',
-			]
-		);
-
-		$this->add_control(
-			'section_heading_color',
-			[
-				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .section-title h3' => 'color: {{VALUE}}',
-				],
-				'default' => '#333'
-			]
-		);
-
-		$this->add_control(
-			'section_desc_style',
-			[
-				'label' => esc_html__( 'Section Description', 'elementor-addon-halim' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'section_desc_typography',
-				'selector' => '{{WRAPPER}} .section-title p',
-			]
-		);
-
-		$this->add_control(
-			'section_desc_color',
-			[
-				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .section-title p' => 'color: {{VALUE}}',
-				],
-				'default' => '#333'
-			]
-		);
-
-
-		$this->add_control(
-			'section_border_style',
-			[
-				'label' => esc_html__( 'Border', 'elementor-addon-halim' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'section_border_color',
+			'slider_subheading_border',
 			[
 				'label' => esc_html__( 'Border Color', 'elementor-addon-halim' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .section-title::before, .section-title::after' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .slide-table h4:before' => 'background-color: {{VALUE}}',
+				],
+				'default' => '#635cdb'
+			]
+		);
+
+		// Slider Title
+		$this->add_control(
+			'slider_title',
+			[
+				'label' => esc_html__( 'Slider Title', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'slider_title_typography',
+				'selector' => '{{WRAPPER}} .slide-table h2',
+			]
+		);
+
+		$this->add_control(
+			'slider_title_color',
+			[
+				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-table h2' => 'color: {{VALUE}}',
+				],
+				'default' => '#fff'
+			]
+		);
+
+		// Slider Description
+		$this->add_control(
+			'slider_desc',
+			[
+				'label' => esc_html__( 'Slider Description', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'slider_desc_typography',
+				'selector' => '{{WRAPPER}} .slide-table p',
+			]
+		);
+
+		$this->add_control(
+			'slider_desc_color',
+			[
+				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-table p' => 'color: {{VALUE}}',
+				],
+				'default' => '#fff'
+			]
+		);
+
+		// Slider Button
+		$this->add_control(
+			'slider_btn',
+			[
+				'label' => esc_html__( 'Slider Button', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'slider_btn_typography',
+				'selector' => '{{WRAPPER}} .slide-table a',
+			]
+		);
+
+		$this->add_control(
+			'slider_btn_color',
+			[
+				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-table a' => 'color: {{VALUE}}',
+				],
+				'default' => '#fff'
+			]
+		);
+
+		$this->add_control(
+			'slider_btn_background',
+			[
+				'label' => esc_html__( 'Background', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-table a' => 'background-color: {{VALUE}}',
+				],
+				'default' => '#635cdb'
+			]
+		);
+
+
+		// Slider Dots
+		$this->add_control(
+			'slider_dots',
+			[
+				'label' => esc_html__( 'Slider Dots', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'slider_dots_color',
+			[
+				'label' => esc_html__( 'Color', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slider .owl-dots div' => 'background-color: {{VALUE}}',
+				],
+				'default' => '#eee'
+			]
+		);
+
+		$this->add_control(
+			'slider_dots_active',
+			[
+				'label' => esc_html__( 'Active Color', 'elementor-addon-halim' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slider .owl-dots div.active' => 'background-color: {{VALUE}}',
 				],
 				'default' => '#635cdb'
 			]
@@ -256,7 +359,30 @@ class Elementor_Slider_Widget extends \Elementor\Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 		$sliders = $settings['sliders'];
+		$slider_items = $settings['slider_items'];
+		$slider_autoplay = $settings['slider_autoplay'];
+
+		if($slider_autoplay == 'true') {
+			$slider_autoplay = 'true';
+		} else {
+			$slider_autoplay = 'false';
+		}
 	?>
+
+		<script>
+			jQuery(document).ready(function ($) {
+			/* Slider Item Slide
+				============================*/
+				$(".slider").owlCarousel({
+					items: <?php echo $slider_items;?>,
+					autoplay: <?php echo $slider_autoplay?>,
+					loop: true,
+					nav: false,
+					dots: true,
+					smartSpeed: 500
+				});
+			});
+		</script>
          <div class="slider owl-carousel">
 			 <?php
 				foreach($sliders as $slider) {
