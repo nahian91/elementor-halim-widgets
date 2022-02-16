@@ -252,6 +252,10 @@ final class Elementor_Addon_Halim_Extension {
 		require_once( __DIR__ . '/widgets/counter.php' );
 		require_once( __DIR__ . '/widgets/team.php' );
 		require_once( __DIR__ . '/widgets/testimonials.php' );
+		require_once( __DIR__ . '/widgets/gallery.php' );
+		require_once( __DIR__ . '/widgets/blog.php' );
+		require_once( __DIR__ . '/widgets/cta.php' );
+		require_once( __DIR__ . '/widgets/contact-info.php' );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Section_Title_Widget() );
 
@@ -268,7 +272,14 @@ final class Elementor_Addon_Halim_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Team_Widget() );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Testimonials_Widget() );
-		
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Gallery_Widget() );	
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Blog_Widget() );	
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_CTA_Widget() );
+
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Contact_Info_Widget() );	
 
 	}
 
@@ -299,13 +310,17 @@ final class Elementor_Addon_Halim_Extension {
 	// Custom CSS
 	public function widget_styles() {
 		wp_register_style( 'elementor-owl', plugins_url( 'assets/css/owl.carousel.css', __FILE__ ) );
+		wp_register_style( 'elementor-magnific', plugins_url( 'assets/css/magnific-popup.css', __FILE__ ) );
 		wp_enqueue_style('elementor-owl');
+		wp_enqueue_style('elementor-magnific');
 	}	
 
     // Custom JS
 	public function widget_scripts() {
-		wp_register_script( 'elementor-owl', plugins_url( 'assets/js/owl.carousel.min.js', __FILE__ ) );
+		wp_register_script( 'elementor-magnific', plugins_url( 'assets/js/owl.carousel.min.js', __FILE__ ) );
+		wp_register_script( 'elementor-owl', plugins_url( 'assets/js/jquery.magnific-popup.min.js', __FILE__ ) );
 		wp_enqueue_script('elementor-owl');
+		wp_enqueue_script('elementor-magnific');
 	}
 
     // Custom Category
